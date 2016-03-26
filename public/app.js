@@ -4,10 +4,7 @@ angular.module('trApp', ['ui.router', 'ui.bootstrap'])
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-      // .state('dashboard', {
-      //   url: '/',
-      //   templateUrl: 'views/mainView.html'
-      // })
+
 
       .state('trip-detail', {
         url: '/trips',
@@ -17,6 +14,11 @@ angular.module('trApp', ['ui.router', 'ui.bootstrap'])
       .state('profile', {
         url: '/profile',
         templateUrl: 'views/partials/profileView.html'
+      })
+
+      .state('create', {
+        url: '/create',
+        templateUrl: 'views/partials/createTrip.html'
       })
     })
 

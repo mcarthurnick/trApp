@@ -137,6 +137,18 @@ html,body {
   background-size: 21px 21px;
 }
 
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.calendar {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
 /*--------- Additional Responsive Style Start -----------*/
 .text-xs-left
 {
