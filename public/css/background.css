@@ -1,0 +1,9 @@
+html  {
+    height: 100%;
+    background-image: url("../img/travel.jpeg");
+    background-size:cover;
+}
+
+body {
+    background-color: transparent;
+}

@@ -1,12 +1,5 @@
-// angular.module('trApp')
-//   .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
-//     $scope.items = items;
-//
-//     $scope.ok = function () {
-//     $uibModalInstance.close($scope.selected.item);
-//     };
-//
-//     $scope.cancel = function () {
-//     $uibModalInstance.dismiss('cancel');
-//     };
-// });
+angular.module('trApp')
+  .controller('ModalInstanceCtrl', ['$scope', 'BackgroundService', function($scope, backgroundService) {
+    $scope.bgService = backgroundService;
+  }]);
+

@@ -1,47 +1,47 @@
-<div>
-  <div>
-    <h3>Create a new trip</h3>
-  </div>
-  <form>
-  <div class="form-group">
-    <label>Where do you want to go?</label>
-    <input type="text" class="form-control" id="destinationInput" placeholder="City, State or Country">
-  <!-- DATE PICKER START -->
-  <div class="calendar"ng-controller="DatepickerCtrl">
-      <div style="display:inline-block; min-height:290px; text-align:center;">
-        <h4>Arrive</h4>
-        <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
-      </div>
-        <div style="display:inline-block; min-height:290px; text-align:center;">
-          <h4>Depart</h4>
-          <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
-      </div>
-  </div>
-
-  <!-- DATE PICKER END -->
-  <div class="form-group">
-    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-    <div class="input-group">
-      <div class="input-group-addon">$</div>
-      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount to Save">
-      <div class="input-group-addon">.00</div>
+ <div>
+    <div>
+      <h3>Create a new trip</h3>
     </div>
-  </div>
+    <form>
+    <div class="form-group">
+      <label>Where do you want to go?</label>
+      <input type="text" class="form-control" id="destinationInput" placeholder="City, State or Country">
+    <!-- DATE PICKER START -->
+    <div class="calendar"ng-controller="DatepickerCtrl">
+        <div style="display:inline-block; min-height:290px; text-align:center;">
+          <h4>Arrive</h4>
+          <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
+        </div>
+          <div style="display:inline-block; min-height:290px; text-align:center;">
+            <h4>Depart</h4>
+            <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
+        </div>
+    </div>
 
-  <div class="form-group">
-    <label>Are you going to fly?</label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox1" value="option1"> Yes
-    </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox2" value="option2"> No
-    </label>
-    <br/>
+    <!-- DATE PICKER END -->
+    <div class="form-group">
+      <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount to Save">
+        <div class="input-group-addon">.00</div>
+      </div>
+    </div>
 
-    <!-- <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
+    <div class="form-group">
+      <label>Are you going to fly?</label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox1" value="option1"> Yes
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" value="option2"> No
+      </label>
+      <br/>
+
+      <!-- <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    <button class="btn btn-warning" type="button">Cancel</button>
+  </form>
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-  <button class="btn btn-warning" type="button">Cancel</button>
-</form>
-</div>
