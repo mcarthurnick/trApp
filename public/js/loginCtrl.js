@@ -1,3 +1,6 @@
-angular.module('trApp').controller('loginCtrl', function($scope, $state, $location, $root ) {
-   $scope.login = $state.is('login');
-})
+// angular.module('trApp').controller('loginCtrl', function($scope, $state, $root ) {
+//    //$scope.login = $state.is('login');
+//    $scope.changeState = function () {
+//     $state.go('dashMain');
+// };
+// })

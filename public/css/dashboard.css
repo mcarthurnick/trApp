@@ -6,6 +6,11 @@ html,body {
     background-color: #fff;
 }
 
+.li>link {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
 
 .navbar-inverse {
   background: #00c6ff; /* fallback for old browsers */
@@ -26,8 +31,7 @@ html,body {
 
 .row {
   margin-top: 51px;
-  height: 950px;
-    background-color: #fff;
+  height: 100%;
 }
 
 .liHead a {
@@ -193,6 +197,10 @@ html,body {
 	color: #666;
 	height: 300px;
 	border-radius: 14px;
+  -webkit-box-shadow: 3px 6px 28px 7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 6px 28px 7px rgba(0,0,0,0.75);
+  box-shadow: 3px 6px 28px 7px rgba(0,0,0,0.75);
+  opacity: 0.9;
 }
 .login-box-body .form-control-feedback,
 .register-box-body .form-control-feedback {

@@ -1,9 +1,14 @@
 html  {
     height: 100%;
-    background-image: url("../img/travel.jpeg");
-    background-size:cover;
+    background-image: url("../img/luxury-travel.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 body {
     background-color: transparent;
+}
+
+row {
+  background-color: transparent;
 }

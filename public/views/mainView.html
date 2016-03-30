@@ -1,59 +1,177 @@
- <div class="container">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Travel App</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Dashboard</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="glyphicon glyphicon-cog"></span></a>
-            <ul class="dropdown-menu">
-              <li><a ui-sref="profile">Settings</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="row">
-    <div class="col-sm-9 col-sm-push-3">
-      <div ui-view>
-      </div>
-    </div>
-    <!-- sidebar area start -->
-    <div class="col-sm-3 col-sm-pull-9 sidebarStyle">
-      <div class="text-xs-center text-sm-left ">
-        <ul class="nav nav-pills nav-stacked">
-          <li class="liHead"><a href="#"><span></span>  Trips</a></li>
-          <li><a ui-sref="trip-detail"<span class="glyphicon glyphicon-unchecked"></span> Trip #1</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-unchecked"></span>  Trip #2</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-unchecked"></span>  Trip #3</a></li>
-        </ul>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="liHead"><a href="#"><span></span> To Do Lists</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-list"></span>  Contacts</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-signal"></span>  Financial Planner</a></li>
-        </ul>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="liHead"><a href="#"><span></span>Plan A New Adventure</a></li>
-          <li><a ui-sref="create"><span class="glyphicon glyphicon-circle-arrow-right"></span>  Create A New Trip</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>  Contacts</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- sidebar area end -->
-    <div class="clearfix">
-    </div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Travel App</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Dashboard</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="glyphicon glyphicon-cog"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a ui-sref="profile">Settings</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="row" >
+          <div class="col-sm-9 col-sm-push-3">
+            <!-- Toggle Trip View Start -->
+            <div ng-show="hideShowTrips">
+                <div class="dashboard-detail">
+                    <div class="dash-widget-half" >
+                        <div>
+                            <h4 style="text-align: center">Travel Info</h4>
+                            <div ng-controller="tripCtrl">
+                                <button ng-click="getTrip()">Go Get Trips!</button>
+                                <ul>
+                                    <li>Destination: {{ myTrips.destination }}</li>
+                                    <li>Arrival Date: {{ myTrips.arrivalDate }}</li>
+                                    <li>Departure Date: {{ myTrips.departDate }}</li>
+                                    <li>Amount To Save: {{ myTrips.amountToSave}}</li>
+                                    <li>Date Created: {{ myTrips.created }}</li>
+                                </ul>
+                            </div>
+                        </div>
 
+                        <h4 style="text-align: center">To Do List</h4>
+                    </div>
+                    <div class="dash-widget-full">
+                      <div>
+                        <h4 style="text-align: center">Savings Progress Bar</h4>
+                        <div class="progress">
 
+                          <uib-progressbar class="progress-striped active" value="75" type="success"><i ng-show="showWarning">!!! Watch out !!!</i>75% Complete (success)</uib-progressbar>
+
+                        </br/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dash-widget-full" id="trans">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Description</th>
+                              <th>Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>2/19/2016</td>
+                              <td>Initial deposit for trip savings!</td>
+                              <td>$125.00</td>
+                            </tr>
+                            <tr>
+                              <td>3/2/2016</td>
+                              <td>Sold watch</td>
+                              <td>$75.00</td>
+                            </tr>
+                            <tr>
+                              <td>3/10/2016</td>
+                              <td>Cashed coins in jar</td>
+                              <td>$275.00</td>
+                            </tr>
+                            <tr>
+                              <td>3/17/2016</td>
+                              <td>Stole from wife</td>
+                              <td>$5.00</td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                          </tfoot>
+                        </table><!--end of .table-responsive-->
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Toggle Trip View End-->
+
+                <!-- Toggle Create New Trip Start -->
+                <div ng-show="hideShowCreate">
+                   <div>
+                     <h3>Create a new trip</h3>
+                   </div>
+                   <form>
+                   <div class="form-group">
+                     <label>Where do you want to go?</label>
+                     <input type="text" class="form-control" id="destinationInput" placeholder="City, State or Country">
+                   <!-- DATE PICKER START -->
+                   <div class="calendar"ng-controller="DatepickerCtrl">
+                       <div style="display:inline-block; min-height:290px; text-align:center;">
+                         <h4>Arrive</h4>
+                         <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
+                       </div>
+                         <div style="display:inline-block; min-height:290px; text-align:center;">
+                           <h4>Depart</h4>
+                           <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
+                       </div>
+                   </div>
+
+                   <!-- DATE PICKER END -->
+                   <div class="form-group">
+                     <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                     <div class="input-group">
+                       <div class="input-group-addon">$</div>
+                       <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount to Save">
+                       <div class="input-group-addon">.00</div>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label>Are you going to fly?</label>
+                     <label class="checkbox-inline">
+                       <input type="checkbox" id="inlineCheckbox1" value="option1"> Yes
+                     </label>
+                     <label class="checkbox-inline">
+                       <input type="checkbox" id="inlineCheckbox2" value="option2"> No
+                     </label>
+                     <br/>
+
+                     <!-- <label for="exampleInputPassword1">Password</label>
+                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
+                   </div>
+                   <button type="submit" class="btn btn-default">Submit</button>
+                   <button class="btn btn-warning" type="button">Cancel</button>
+                 </form>
+                 </div>
+              </div>
+                <!-- Toggle Create New Trip End -->
+          </div>
+          <!-- sidebar area start -->
+          <div class="col-sm-3 col-sm-pull-9 sidebarStyle">
+            <div class="text-xs-center text-sm-left ">
+              <ul class="nav nav-pills nav-stacked">
+                <li class="liHead"><a href="#"><span></span> To Do Lists</a></li>
+                <li ng-click="toggleTrips()"><a><span class="glyphicon glyphicon-unchecked"></span> Trip #1</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-unchecked"></span>  Trip #2</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-unchecked"></span>  Trip #3</a></li>
+              </ul>
+              <ul class="nav nav-pills nav-stacked">
+                <li class="liHead"><a href="#"><span></span> To Do Lists</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-list"></span>  Contacts</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-signal"></span>  Financial Planner</a></li>
+              </ul>
+              <ul class="nav nav-pills nav-stacked">
+                <li class="liHead"><a href="#"><span></span>Plan A New Adventure</a></li>
+                <li ng-click="toggleCreateTrip()"><a><span class="glyphicon glyphicon-circle-arrow-right"></span>  Create A New Trip</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>  Contacts</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- sidebar area end -->
+          <div class="clearfix">
+          </div>
+            </div>

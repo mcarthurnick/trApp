@@ -10,13 +10,15 @@ angular.module('trApp', ['ui.router', 'ui.bootstrap', 'uiRouterStyles'])
 
         .state('login', {
             url: '/login',
-            templateUrl: 'views/login.html',
-            data: {
-                css: 'css/background.css'
-            }
+            templateUrl: 'views/partials/loginView.html'
         })
 
-      .state('trip-detail', {
+      .state('dashMain', {
+        url: '/dashboard',
+        templateUrl: 'views/mainView.html'
+      })
+
+      .state('tripDetail', {
         url: '/trips',
         templateUrl: 'views/partials/tripDetailView.html'
       })
@@ -33,12 +35,17 @@ angular.module('trApp', ['ui.router', 'ui.bootstrap', 'uiRouterStyles'])
       })
     })
 
-    .directive('dashboard', function() {
-      return {
-        templateUrl: 'views/mainView.html',
-          // link: function(scope, element, attributes) {
-          //     element.addClass('dashClass');
-          // }
-      }
-    })
+    // .directive('dashboard', function() {
+    //   return {
+    //     templateUrl: 'views/mainView.html',
+    //       // link: function(scope, element, attributes) {
+    //       //     element.addClass('dashClass');
+    //       // }
+    //   }
+    // })
 
+  // .run(['$state', function($state) {
+  //   $state.go('dashMain.tripDetail').then(function() {
+  //     $state.go('dashMain.createTrip');
+  //   });
+  // }]);
