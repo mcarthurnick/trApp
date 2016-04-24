@@ -1,0 +1,35 @@
+<!-- BEGIN LOGIN FORM -->
+<div class="hold-transition login-page" ng-controller="loginCtrl">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#">TraV<b>App</b></a>
+        </div><!-- /.login-logo -->
+        <div class="register-box-body">
+            <p class="register-box-msg">Register for TraVApp</p>
+            <form ng-submit="registerForm()">
+              <div class="form-group has-feedback">
+                First Name: <input type="text" ng-model="input.firstName"/>
+              </div>
+              <div class="form-group has-feedback">
+                Last Name: <input type="text" ng-model="input.lastName"/>
+              </div>
+              <div class="form-group has-feedback">
+                E-Mail: <input type="text" ng-model="input.email"/>
+              </div>
+              <div class="form-group has-feedback">
+                Phone: <input type="text" ng-model="input.phone" />
+              </div>
+              <div class="form-group has-feedback">
+                Password: <input type="password" ng-model="input.password" />
+              </div>
+            <div class="row">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    </div>
+                    <div class="col-xs-12">
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>

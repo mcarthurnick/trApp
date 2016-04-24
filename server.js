@@ -2,6 +2,10 @@ var express = require('express')
     , bodyParser = require('body-parser')
     , cors = require('cors')
     , mongoose = require('mongoose')
+    , session = require('express-session')
+    , moment = require('moment')
+    , morgan = require('morgan')
+    , methodOverride = require('method-override')
     , userModelControl = require('./app/controllers/userModelControl.js')
     , tripModelControl = require('./app/controllers/tripModelControl.js');
 
@@ -12,6 +16,11 @@ var corsOptions = {
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(session({
+  secret: 'my secret session cat',
+  resave: true,
+  saveUninitialized: false
+}));
 
 app.use(express.static(__dirname + '/public'));
 
@@ -22,11 +31,13 @@ mongoose.connection.once("open", function() {
 });
 
 
+// app.get('/', userModelControl.checkAuth);
+app.post('/login', userModelControl.loginUser);
+//app.post('/trip', userModelControl.addTrip);
+app.get('/dashboard', userModelControl.getUsers);
+app.post('/register', userModelControl.addUser);
+//app.post('/addNewUser', userModelControl.addNewUser);
 
-app.get('/trip', tripModelControl.getTrips);
-app.post('/trip', tripModelControl.addTrips);
-app.get('/user', userModelControl.getUsers);
-app.post('/user', userModelControl.addUsers);
 
 var port = 3000;
 app.listen(port, function() {

@@ -12,7 +12,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Dashboard</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="glyphicon glyphicon-cog"></span></a>
+                  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="glyphicon glyphicon-cog"></span></a>
                   <ul class="dropdown-menu">
                     <li><a ui-sref="profile">Settings</a></li>
                     <li role="separator" class="divider"></li>
@@ -25,40 +25,57 @@
             </div>
           </div>
         </nav>
-        <div class="row" >
+        <div class="row tripForm">
           <div class="col-sm-9 col-sm-push-3">
             <!-- Toggle Trip View Start -->
             <div ng-show="hideShowTrips">
                 <div class="dashboard-detail">
                     <div class="dash-widget-half" >
                         <div>
-                            <h4 style="text-align: center">Travel Info</h4>
-                            <div ng-controller="tripCtrl">
-                                <button ng-click="getTrip()">Go Get Trips!</button>
+                            <h4 style="text-align: center">Travel Information for {{ trip.destination }}.</h4>
+                            <div>
+                              <hr />
                                 <ul>
-                                    <li>Destination: {{ myTrips.destination }}</li>
-                                    <li>Arrival Date: {{ myTrips.arrivalDate }}</li>
-                                    <li>Departure Date: {{ myTrips.departDate }}</li>
-                                    <li>Amount To Save: {{ myTrips.amountToSave}}</li>
-                                    <li>Date Created: {{ myTrips.created }}</li>
+                                    <h4>Arrive on: {{ trip.arrivalDate | date:'fullDate' }}</h4>
+                                    <h4>Depart on: {{ trip.departDate | date:'fullDate' }}</h4>
+                                    <h4>Flying out of: {{ baseAirport }}</p><h4>
                                 </ul>
                             </div>
                         </div>
-
-                        <h4 style="text-align: center">To Do List</h4>
+                      </div>
+                    <div class="dash-widget-half">
+                      <h4 style="text-align: center">So far you have saved</h4>
+                      <hr />
+                      <p class="moneySaved">${{ amountSaved }} <strong style="color:#999;">out of</strong> ${{ trip.amountToSave }}</p>
                     </div>
                     <div class="dash-widget-full">
                       <div>
-                        <h4 style="text-align: center">Savings Progress Bar</h4>
+                        <h4 style="text-align: center">{{ percentOfGoal }}% of your goal! Keep it going!</h4>
                         <div class="progress">
-
-                          <uib-progressbar class="progress-striped active" value="75" type="success"><i ng-show="showWarning">!!! Watch out !!!</i>75% Complete (success)</uib-progressbar>
+                          <uib-progressbar class="progress-striped active" value="getProgressbarValue()" type="success"></uib-progressbar>
 
                         </br/>
                         </div>
                       </div>
                     </div>
-                    <div class="dash-widget-full" id="trans">
+                    <div class="dash-widget-half" id="todo">
+                      <div ng-controller="toDoCtrl">
+                        <h4 style="text-align: center">To Do List For {{ trip.destination }}.</h4>
+                        <hr />
+                        <form ng-submit="add()" name="toDoList">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Add to List</label>
+                            <input type="text" class="form-control" ng-model="title" placeholder="ex. Call Hotel #1-800-984-2938"><button type="submit" class="btn btn-success">Add Task</button>
+                          </div>
+                        </form>
+                        <div>
+                          <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="task in tasks track by $index"> {{ task }} <button ng-click="delete()">Delete</button></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dash-widget-half" id="trans">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead>
@@ -69,105 +86,103 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>2/19/2016</td>
-                              <td>Initial deposit for trip savings!</td>
-                              <td>$125.00</td>
-                            </tr>
-                            <tr>
-                              <td>3/2/2016</td>
-                              <td>Sold watch</td>
-                              <td>$75.00</td>
-                            </tr>
-                            <tr>
-                              <td>3/10/2016</td>
-                              <td>Cashed coins in jar</td>
-                              <td>$275.00</td>
-                            </tr>
-                            <tr>
-                              <td>3/17/2016</td>
-                              <td>Stole from wife</td>
-                              <td>$5.00</td>
+                            <tr ng-repeat="deposit in deposits">
+                              <td>{{ deposit.date | date:'fullDate' }}</td>
+                              <td>{{ deposit.description }}</td>
+                              <td>${{ deposit.amountDeposited }}</td>
                             </tr>
                           </tbody>
-                          <tfoot>
-                          </tfoot>
-                        </table><!--end of .table-responsive-->
+                        </table>
+                        </div>
+                        <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <button ng-click="makeDeposit = !makeDeposit"  class="tableHeader">Add Money</button>
+                            </tr>
+                          </thead>
+                          <div ng-show="makeDeposit">
+                            <div>
+                            <form>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Amout to Deposit</label>
+                                <input type="text" class="form-control" placeholder="$">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Description</label>
+                                <input type="text" class="form-control" placeholder="optional">
+                              </div>
+                              <button type="button" class="depositBtn">Add A Deposit</button>
+                            </form>
+                      </div>
+                      </table>
                     </div>
                     </div>
                   </div>
                 </div>
                 <!-- Toggle Trip View End-->
 
+
+
                 <!-- Toggle Create New Trip Start -->
-                <div ng-show="hideShowCreate">
-                   <div>
-                     <h3>Create a new trip</h3>
-                   </div>
-                   <form>
-                   <div class="form-group">
-                     <label>Where do you want to go?</label>
-                     <input type="text" class="form-control" id="destinationInput" placeholder="City, State or Country">
-                   <!-- DATE PICKER START -->
-                   <div class="calendar"ng-controller="DatepickerCtrl">
-                       <div style="display:inline-block; min-height:290px; text-align:center;">
-                         <h4>Arrive</h4>
-                         <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
-                       </div>
-                         <div style="display:inline-block; min-height:290px; text-align:center;">
-                           <h4>Depart</h4>
-                           <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker>
-                       </div>
-                   </div>
-
-                   <!-- DATE PICKER END -->
-                   <div class="form-group">
-                     <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                     <div class="input-group">
-                       <div class="input-group-addon">$</div>
-                       <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount to Save">
-                       <div class="input-group-addon">.00</div>
-                     </div>
-                   </div>
-
-                   <div class="form-group">
-                     <label>Are you going to fly?</label>
-                     <label class="checkbox-inline">
-                       <input type="checkbox" id="inlineCheckbox1" value="option1"> Yes
-                     </label>
-                     <label class="checkbox-inline">
-                       <input type="checkbox" id="inlineCheckbox2" value="option2"> No
-                     </label>
-                     <br/>
-
-                     <!-- <label for="exampleInputPassword1">Password</label>
-                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
-                   </div>
-                   <button type="submit" class="btn btn-default">Submit</button>
-                   <button class="btn btn-warning" type="button">Cancel</button>
-                 </form>
-                 </div>
+                <div ng-show="hideShowCreate" class="newTripForm">
+                  <div ng-controller="newTripCtrl">
+                    <h3>Create a new trip</h3>
+                  </div>
+                  <form ng-submit="createTrip(input)">
+                  <div>
+                    <label>Where do you want to go?</label>
+                    <input type="text" class="form-control" ng-model="input.destination" placeholder="City, State or Country">
+                  <!-- DATE PICKER START -->
+                      <div style="display:inline-block; min-height:100px; text-align:center;">
+                        <h4>Arrive</h4>
+                        <input ng-model="input.arrivalDate" type="text" class="form-control" placeholder="Arrival Date">
+                        <!-- <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre> -->
+                        <!-- <uib-datepicker ng-model="input.arrivalDate" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker> -->
+                      </div>
+                        <div style="display:inline-block; min-height:100px; text-align:center;">
+                          <h4>Depart</h4>
+                          <input ng-model="input.departDate" type="text" class="form-control" placeholder="Departure Date">
+                          <!-- <uib-datepicker ng-model="departDate" class="well well-sm" datepicker-options="inlineOptions"></uib-datepicker> -->
+                      </div>
+                  <div class="form-group">
+                    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">$</div>
+                      <input ng-model="input.amountToSave" type="text" class="form-control" id="exampleInputAmount" placeholder="Amount to Save">
+                      <div class="input-group-addon">.00</div>
+                  </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon">$</div>
+                      <input ng-model="input.initialDeposit" type="text" class="form-control" id="exampleInputAmount" placeholder="Initial Deposit">
+                      <div class="input-group-addon">.00</div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                  <button class="btn btn-warning" type="button">Cancel</button>
+                </form>
               </div>
+                </div>
                 <!-- Toggle Create New Trip End -->
           </div>
           <!-- sidebar area start -->
           <div class="col-sm-3 col-sm-pull-9 sidebarStyle">
             <div class="text-xs-center text-sm-left ">
               <ul class="nav nav-pills nav-stacked">
-                <li class="liHead"><a href="#"><span></span> To Do Lists</a></li>
-                <li ng-click="toggleTrips()"><a><span class="glyphicon glyphicon-unchecked"></span> Trip #1</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-unchecked"></span>  Trip #2</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-unchecked"></span>  Trip #3</a></li>
+                <li class="liHead"><a href="#"><span></span> Trips</a></li>
+                <li class="nav-item" ng-repeat="trip in currentUser.trips track by $index" ng-click="toggleTrips($index)"><a><span class="glyphicon glyphicon-unchecked">  </span>  {{ trip.destination }}</a></li>
               </ul>
-              <ul class="nav nav-pills nav-stacked">
+              <!-- <ul class="nav nav-pills nav-stacked">
                 <li class="liHead"><a href="#"><span></span> To Do Lists</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-list"></span>  Contacts</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-signal"></span>  Financial Planner</a></li>
-              </ul>
+              </ul> -->
               <ul class="nav nav-pills nav-stacked">
                 <li class="liHead"><a href="#"><span></span>Plan A New Adventure</a></li>
                 <li ng-click="toggleCreateTrip()"><a><span class="glyphicon glyphicon-circle-arrow-right"></span>  Create A New Trip</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>  Contacts</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-road"></span>  Archived Trips</a></li>
               </ul>
             </div>
           </div>

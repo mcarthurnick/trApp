@@ -4,7 +4,7 @@ angular.module('trApp', ['ui.router', 'ui.bootstrap', 'uiRouterStyles'])
 
 .config(function($urlRouterProvider, $stateProvider) {
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider
 
@@ -18,21 +18,21 @@ angular.module('trApp', ['ui.router', 'ui.bootstrap', 'uiRouterStyles'])
         templateUrl: 'views/mainView.html'
       })
 
-      .state('tripDetail', {
-        url: '/trips',
-        templateUrl: 'views/partials/tripDetailView.html'
+      .state('deposit', {
+        url: '/deposit',
+        templateUrl: "/views/mainView.html"
+      })
+
+      .state('register', {
+        url: '/register',
+        templateUrl: '/views/partials/register.html'
       })
 
       .state('profile', {
         url: '/profile',
-        templateUrl: 'views/partials/profileView.html'
+        templateUrl: '/views/partials/profileView.html'
       })
 
-      .state('create', {
-        url: '/create',
-        templateUrl: 'views/partials/createTrip.html'
-
-      })
     })
 
     // .directive('dashboard', function() {

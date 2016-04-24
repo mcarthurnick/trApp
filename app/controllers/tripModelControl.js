@@ -4,7 +4,7 @@ var Trip = require('../models/trip-model.js');
 
 module.exports = {
   getTrips: function(req, res) {
-    Trip.find({destination: "Orlando, FL"}, function(err, trip) {
+    Trip.find({}, function(err, trip) {
       if (err) {
         res.status(500).send(err);
       } else {
